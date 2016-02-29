@@ -2,6 +2,10 @@
 
 This package provides two containers (`NewDocContainer` and `EditDocContainer`) that work with the schema extension defined in the [smart-methods](https://github.com/meteor-utilities/smart-methods) package to let you easily generate new document and edit document forms. 
 
+### Install
+
+`meteor add utilities:react-form-containers`
+
 ### `NewDocContainer`
 
 This container takes the following properties:
