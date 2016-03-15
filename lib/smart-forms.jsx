@@ -1,6 +1,8 @@
 import Formsy from 'formsy-react';
 import FRC from 'formsy-react-components';
 
+import Utils from './utils.js';
+
 const Checkbox = FRC.Checkbox;
 const CheckboxGroup = FRC.CheckboxGroup;
 const Input = FRC.Input;
@@ -10,13 +12,10 @@ const Textarea = FRC.Textarea;
 
 const SmartForms = {};
 
-// add support for nested properties
-const deepValue = function(obj, path){
-  for (var i=0, path=path.split('.'), len=path.length; i<len; i++){
-    obj = obj[path[i]];
-  };
-  return obj;
-};
+SimpleSchema.extendOptions({
+  insertableIf: Match.Optional(Function),
+  editableIf: Match.Optional(Function)
+});
 
 SmartForms.getComponent = (fieldName, field, document) => {
 
@@ -25,7 +24,7 @@ SmartForms.getComponent = (fieldName, field, document) => {
     options = typeof field.autoform.options === "function" ? field.autoform.options() : field.autoform.options;
   }
 
-  const value = deepValue(document, fieldName) ? deepValue(document, fieldName) : "";
+  const value = Utils.deepValue(document, fieldName) ? Utils.deepValue(document, fieldName) : "";
 
   switch (field.control) {
 

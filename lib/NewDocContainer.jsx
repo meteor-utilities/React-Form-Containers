@@ -1,6 +1,8 @@
 import SmartForms from "./smart-forms.jsx";
 import Formsy from 'formsy-react';
 
+import Utils from './utils.js';
+
 const NewDocContainer = React.createClass({
 
   propTypes: {
@@ -22,7 +24,7 @@ const NewDocContainer = React.createClass({
   submitForm(data) {
     
     // remove any empty properties
-    const document = _.compactObject(data); 
+    const document = _.compactObject(Utils.flatten(data)); 
     const collection = this.props.collection;
     const methodName = this.props.methodName ? this.props.methodName : collection._name+'.create';
 

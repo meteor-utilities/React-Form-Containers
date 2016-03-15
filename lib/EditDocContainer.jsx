@@ -1,6 +1,8 @@
 import SmartForms from "./smart-forms.jsx";
 import Formsy from 'formsy-react';
 
+import Utils from './utils.js';
+
 const EditDocContainer = React.createClass({
   
   propTypes: {
@@ -22,11 +24,15 @@ const EditDocContainer = React.createClass({
 
   submitForm(data) {
     
+    console.log(data)
+
     const document = this.props.document;
-    const modifier = {$set: _.compactObject(data)};
+    const modifier = {$set: _.compactObject(Utils.flatten(data))};
     const collection = this.props.collection;
     const methodName = this.props.methodName ? this.props.methodName : collection._name+'.edit';
     
+    console.log(modifier)
+
     Meteor.call(methodName, document._id, modifier, (error, document) => {
       if (error) {
         console.log(error)

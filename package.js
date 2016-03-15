@@ -14,7 +14,10 @@ Package.onUse(function(api) {
     'modules',
     'ecmascript',
     'jsx@0.2.4',
-    'utilities:smart-methods@0.1.0'
+    'check',
+    // 'utilities:smart-methods@0.1.0',
+    'aldeed:simple-schema@1.5.3',
+    'aldeed:collection2@2.8.0'
   ]);
 
   api.mainModule("lib/export.js", ["client", "server"]);
