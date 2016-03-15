@@ -10,6 +10,14 @@ const Textarea = FRC.Textarea;
 
 const SmartForms = {};
 
+// add support for nested properties
+const deepValue = function(obj, path){
+  for (var i=0, path=path.split('.'), len=path.length; i<len; i++){
+    obj = obj[path[i]];
+  };
+  return obj;
+};
+
 SmartForms.getComponent = (fieldName, field, document) => {
 
   let options = [];
@@ -17,7 +25,7 @@ SmartForms.getComponent = (fieldName, field, document) => {
     options = typeof field.autoform.options === "function" ? field.autoform.options() : field.autoform.options;
   }
 
-  const value = document && document[fieldName] ? document[fieldName] : "";
+  const value = deepValue(document, fieldName) ? deepValue(document, fieldName) : "";
 
   switch (field.control) {
 
