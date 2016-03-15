@@ -1,7 +1,7 @@
 Package.describe({
   name: "utilities:react-form-containers",
   summary: "Form containers for React",
-  version: "0.1.3",
+  version: "0.1.4",
   git: "https://github.com/meteor-utilities/react-form-containers.git"
 });
 

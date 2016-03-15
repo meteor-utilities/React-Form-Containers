@@ -24,7 +24,7 @@ SmartForms.getComponent = (fieldName, field, document) => {
     options = typeof field.autoform.options === "function" ? field.autoform.options() : field.autoform.options;
   }
 
-  const value = Utils.deepValue(document, fieldName) ? Utils.deepValue(document, fieldName) : "";
+  const value = document && Utils.deepValue(document, fieldName) ? Utils.deepValue(document, fieldName) : "";
 
   switch (field.control) {
 
