@@ -1,3 +1,5 @@
+import React, { PropTypes, Component } from 'react';
+
 import SmartForms from "./smart-forms.jsx";
 import Formsy from 'formsy-react';
 
