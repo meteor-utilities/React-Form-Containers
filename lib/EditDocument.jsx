@@ -1,27 +1,19 @@
 import React, { PropTypes, Component } from 'react';
+import Formsy from 'formsy-react';
+import { Button } from 'react-bootstrap';
 
 import SmartForms from "./smart-forms.jsx";
-import Formsy from 'formsy-react';
-
 import Utils from './utils.js';
 
-const EditDocContainer = React.createClass({
+const EditDocument = React.createClass({
   
   propTypes: {
-    document: React.PropTypes.object, // required but might be passed later on
-    collection: React.PropTypes.object, // required but might be passed later on
-    label: React.PropTypes.string,
+    document: React.PropTypes.object.isRequired,
+    collection: React.PropTypes.object.isRequired,
+    currentUser: React.PropTypes.object,
     successCallback: React.PropTypes.func,
     errorCallback: React.PropTypes.func,
     methodName: React.PropTypes.string
-  },
-
-  mixins: [ReactMeteorData],
-  
-  getMeteorData() {
-    return {
-      currentUser: Meteor.user()
-    };
   },
 
   submitForm(data) {
@@ -53,19 +45,23 @@ const EditDocContainer = React.createClass({
 
     const document = this.props.document;
     const collection = this.props.collection;
-    const fields = collection.getInsertableFields(this.data.currentUser);
+    const fields = collection.getInsertableFields(this.props.currentUser);
+
+    const style = {
+      maxWidth: "800px",
+      width: "100%"
+    }
 
     return (
-      <div className="document-edit">
-        <h3>{this.props.label}</h3>
+      <div className="edit-document" style={style}>
         <Formsy.Form onSubmit={this.submitForm}>
-          {fields.map(fieldName => SmartForms.getComponent(fieldName, collection.simpleSchema()._schema[fieldName], document))}
-          <button type="submit" className="button button--primary">Submit</button>
+          {fields.map(fieldName => <div key={fieldName} className={"input-"+fieldName}>{SmartForms.getComponent(fieldName, collection.simpleSchema()._schema[fieldName], document)}</div>)}
+          <Button type="submit" bsStyle="primary">Submit</Button>
         </Formsy.Form>
       </div>
     )
   }
 });
 
-module.exports = EditDocContainer;
-export default EditDocContainer;
+module.exports = EditDocument;
+export default EditDocument;

@@ -29,9 +29,9 @@ SmartForms.getComponent = (fieldName, field, document) => {
   switch (field.control) {
 
     case "text":
-      return <Input         key={fieldName} name={fieldName} value={value} label={fieldName} type="text" className="text-input"/>;
+      return <Input         key={fieldName} name={fieldName} value={value} label={fieldName} type="text" />;
     case "textarea":
-      return <Textarea      key={fieldName} name={fieldName} value={value} label={fieldName} className="textarea"/>;
+      return <Textarea      key={fieldName} name={fieldName} value={value} label={fieldName} />;
     case "checkbox":
       return <Checkbox      key={fieldName} name={fieldName} value={value} label={fieldName}/>;        
     case "checkboxgroup":
@@ -41,7 +41,7 @@ SmartForms.getComponent = (fieldName, field, document) => {
     case "select":
       return <Select        key={fieldName} name={fieldName} value={value} label={fieldName} options={options} />;
     default: 
-      return <Input         key={fieldName} name={fieldName} value={value} label={fieldName} type="text" className="text-input"/>;
+      return <Input         key={fieldName} name={fieldName} value={value} label={fieldName} type="text" />;
   }
 }
 

@@ -1,26 +1,18 @@
 import React, { PropTypes, Component } from 'react';
+import Formsy from 'formsy-react';
+import { Button } from 'react-bootstrap';
 
 import SmartForms from "./smart-forms.jsx";
-import Formsy from 'formsy-react';
-
 import Utils from './utils.js';
 
-const NewDocContainer = React.createClass({
+const NewDocument = React.createClass({
 
   propTypes: {
     collection: React.PropTypes.object.isRequired,
-    label: React.PropTypes.string,
+    currentUser: React.PropTypes.object,
     errorCallback: React.PropTypes.func,
     successCallback: React.PropTypes.func,
     methodName: React.PropTypes.string
-  },
-
-  mixins: [ReactMeteorData],
-  
-  getMeteorData() {
-    return {
-      currentUser: Meteor.user()
-    };
   },
 
   submitForm(data) {
@@ -47,19 +39,23 @@ const NewDocContainer = React.createClass({
   render() {
     
     const collection = this.props.collection;
-    const fields = collection.getInsertableFields(this.data.currentUser);
+    const fields = collection.getInsertableFields(this.props.currentUser);
+
+    const style = {
+      maxWidth: "800px",
+      width: "100%"
+    }
 
     return (
-      <div className="new-document">
-        <h3>{this.props.label}</h3>
+      <div className="new-document" style={style}>
         <Formsy.Form onSubmit={this.submitForm}>
-          {fields.map(fieldName => SmartForms.getComponent(fieldName, collection.simpleSchema()._schema[fieldName]))}
-          <button type="submit" className="button button--primary">Submit</button>
+          {fields.map(fieldName => <div key={fieldName} className={"input-"+fieldName}>{SmartForms.getComponent(fieldName, collection.simpleSchema()._schema[fieldName])}</div>)}
+          <Button type="submit" bsStyle="primary">Submit</Button>
         </Formsy.Form>
       </div>
     )
   }
 });
 
-module.exports = NewDocContainer;
-export default NewDocContainer;
+module.exports = NewDocument;
+export default NewDocument;

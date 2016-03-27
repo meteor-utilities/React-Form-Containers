@@ -12,10 +12,10 @@ Package.onUse(function(api) {
   api.use([
     'ecmascript',
     'check',
-    'react-meteor-data@0.2.6-beta.16',
     'tmeasday:check-npm-versions@0.1.1',
     'aldeed:simple-schema@1.5.3',
-    'aldeed:collection2@2.8.0'
+    'aldeed:collection2@2.8.0',
+    'utilities:smart-methods@0.1.2'
   ]);
 
   api.mainModule("lib/export.js", ["client", "server"]);
