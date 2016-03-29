@@ -25,9 +25,8 @@ SmartForms.getComponent = (fieldName, field, labelFunction, document) => {
   }
 
   const value = document && Utils.deepValue(document, fieldName) ? Utils.deepValue(document, fieldName) : "";
-  // const label = typeof labelFunction === "function" ? labelFunction(fieldName) : fieldName;
-  const label = fieldName;
-  
+  const label = typeof labelFunction === "function" ? labelFunction(fieldName) : fieldName;
+
   switch (field.control) {
 
     case "text":
@@ -36,8 +35,9 @@ SmartForms.getComponent = (fieldName, field, labelFunction, document) => {
       return <Textarea      key={fieldName} name={fieldName} value={value} label={label} />;
     case "checkbox":
       return <Checkbox      key={fieldName} name={fieldName} value={value} label={label}/>;        
-    case "checkboxgroup":
-      return <CheckboxGroup key={fieldName} name={fieldName} value={value} label={label} options={options} />;
+    // note: checkboxgroup cause React refs error
+    // case "checkboxgroup":
+    //  return <CheckboxGroup key={fieldName} name={fieldName} value={value} label={label} options={options} />;
     case "radiogroup":
       return <RadioGroup    key={fieldName} name={fieldName} value={value} label={label} options={options} />;
     case "select":
