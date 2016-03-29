@@ -17,7 +17,7 @@ SimpleSchema.extendOptions({
   editableIf: Match.Optional(Function)
 });
 
-SmartForms.getComponent = (fieldName, field, document) => {
+SmartForms.getComponent = (fieldName, field, labelFunction, document) => {
 
   let options = [];
   if (field.autoform && field.autoform.options) {
@@ -25,23 +25,25 @@ SmartForms.getComponent = (fieldName, field, document) => {
   }
 
   const value = document && Utils.deepValue(document, fieldName) ? Utils.deepValue(document, fieldName) : "";
-
+  // const label = typeof labelFunction === "function" ? labelFunction(fieldName) : fieldName;
+  const label = fieldName;
+  
   switch (field.control) {
 
     case "text":
-      return <Input         key={fieldName} name={fieldName} value={value} label={fieldName} type="text" />;
+      return <Input         key={fieldName} name={fieldName} value={value} label={label} type="text" />;
     case "textarea":
-      return <Textarea      key={fieldName} name={fieldName} value={value} label={fieldName} />;
+      return <Textarea      key={fieldName} name={fieldName} value={value} label={label} />;
     case "checkbox":
-      return <Checkbox      key={fieldName} name={fieldName} value={value} label={fieldName}/>;        
+      return <Checkbox      key={fieldName} name={fieldName} value={value} label={label}/>;        
     case "checkboxgroup":
-      return <CheckboxGroup key={fieldName} name={fieldName} value={value} label={fieldName} options={options} />;
+      return <CheckboxGroup key={fieldName} name={fieldName} value={value} label={label} options={options} />;
     case "radiogroup":
-      return <RadioGroup    key={fieldName} name={fieldName} value={value} label={fieldName} options={options} />;
+      return <RadioGroup    key={fieldName} name={fieldName} value={value} label={label} options={options} />;
     case "select":
-      return <Select        key={fieldName} name={fieldName} value={value} label={fieldName} options={options} />;
+      return <Select        key={fieldName} name={fieldName} value={value} label={label} options={options} />;
     default: 
-      return <Input         key={fieldName} name={fieldName} value={value} label={fieldName} type="text" />;
+      return <Input         key={fieldName} name={fieldName} value={value} label={label} type="text" />;
   }
 }
 

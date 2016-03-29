@@ -15,6 +15,7 @@ This component takes the following properties:
 - `errorCallback`: a function to call on error.
 - `successCallback`: a function to call on success.
 - `methodName`: the name of the method to submit the form to. 
+- `labelFunction`: a function that will be called on each field's name to get the label (for example, an internationalization function).
 
 ### `EditDocument`
 

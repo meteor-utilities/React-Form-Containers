@@ -13,7 +13,8 @@ const EditDocument = React.createClass({
     currentUser: React.PropTypes.object,
     successCallback: React.PropTypes.func,
     errorCallback: React.PropTypes.func,
-    methodName: React.PropTypes.string
+    methodName: React.PropTypes.string,
+    labelFunction: React.PropTypes.func
   },
 
   submitForm(data) {
@@ -55,7 +56,7 @@ const EditDocument = React.createClass({
     return (
       <div className="edit-document" style={style}>
         <Formsy.Form onSubmit={this.submitForm}>
-          {fields.map(fieldName => <div key={fieldName} className={"input-"+fieldName}>{SmartForms.getComponent(fieldName, collection.simpleSchema()._schema[fieldName], document)}</div>)}
+          {fields.map(fieldName => <div key={fieldName} className={"input-"+fieldName}>{SmartForms.getComponent(fieldName, collection.simpleSchema()._schema[fieldName], this.props.labelFunction, document)}</div>)}
           <Button type="submit" bsStyle="primary">Submit</Button>
         </Formsy.Form>
       </div>
