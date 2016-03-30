@@ -1,3 +1,4 @@
+import React, { PropTypes, Component } from 'react';
 import Formsy from 'formsy-react';
 import FRC from 'formsy-react-components';
 
@@ -35,9 +36,9 @@ SmartForms.getComponent = (fieldName, field, labelFunction, document) => {
       return <Textarea      key={fieldName} name={fieldName} value={value} label={label} />;
     case "checkbox":
       return <Checkbox      key={fieldName} name={fieldName} value={value} label={label}/>;        
-    // note: checkboxgroup cause React refs error
-    // case "checkboxgroup":
-    //  return <CheckboxGroup key={fieldName} name={fieldName} value={value} label={label} options={options} />;
+    // note: checkboxgroup cause React refs error, so use RadioGroup for now
+    case "checkboxgroup":
+     return <RadioGroup     key={fieldName} name={fieldName} value={value} label={label} options={options} />;
     case "radiogroup":
       return <RadioGroup    key={fieldName} name={fieldName} value={value} label={label} options={options} />;
     case "select":
